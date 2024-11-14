@@ -4,7 +4,6 @@ require 'config.php';
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // CSRF koruması
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
         $errors[] = "Geçersiz CSRF token!";
     }
@@ -14,13 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_SESSION['user_id'];
     $image_path = null;
 
-    // Resim yükleme işlemi
     if (!empty($_FILES['image']['name'])) {
         $image_name = basename($_FILES['image']['name']);
         $target_dir = "uploads/";
         $target_file = $target_dir . uniqid() . "_" . $image_name;
 
-        // Sadece güvenli resim formatlarını kabul et
         $allowed_file_types = ['image/jpeg', 'image/png', 'image/gif'];
         if (in_array($_FILES['image']['type'], $allowed_file_types)) {
             if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
@@ -34,7 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($errors)) {
-        // SQL Injection koruması için prepared statement kullanımı
         $stmt = $pdo->prepare("INSERT INTO posts (user_id, title, content, image_path) VALUES (:user_id, :title, :content, :image_path)");
         $stmt->execute([
             'user_id'    => $user_id,
@@ -48,7 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// CSRF token oluştur
 $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 ?>
 <!DOCTYPE html>
@@ -59,7 +54,6 @@ $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
     <title>Gönderi Oluştur</title>
 
     <style>
-        /* Matrix efekti için CSS */
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -67,7 +61,7 @@ $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
             background-color: #1b1b1b;
             color: #ffffff;
             position: relative;
-            overflow: hidden; /* Taşan içerikleri gizle */
+            overflow: hidden;
         }
 
         .matrix-container {
@@ -76,29 +70,29 @@ $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* Tıklama olaylarını devre dışı bırak */
+    pointer-events: none; 
     overflow: hidden;
 }
 
 .column {
     position: absolute;
-    color: lime; /* Metin rengi */
-    font-family: monospace; /* Yazı tipi */
-    font-size: 20px; /* Yazı boyutu */
-    white-space: nowrap; /* Satır sonu ekleme */
-    opacity: 1; /* Başlangıçta görünür */
-    transition: opacity 0.1s ease; /* Opaklık geçişi */
+    color: lime; 
+    font-family: monospace; 
+    font-size: 20px; 
+    white-space: nowrap; 
+    opacity: 1; 
+    transition: opacity 0.1s ease;
 }
 
         .container {
             position: relative;
-            z-index: 1; /* İçeriklerin üstte görünmesini sağla */
+            z-index: 1;
             padding: 20px;
         }
 
         h1 {
             text-align: center;
-            color: #00ff99; /* Neon yeşil başlık rengi */
+            color: #00ff99;
             margin-bottom: 20px;
         }
 
@@ -135,28 +129,28 @@ $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
         input[type="submit"] {
             margin: 10px 0;
             padding: 12px;
-            border: 1px solid #00ff99; /* Neon yeşil kenarlık */
+            border: 1px solid #00ff99; 
             border-radius: 5px;
-            background: #2b2b2b; /* Form arka plan rengi */
-            color: #ffffff; /* Yazı rengi */
+            background: #2b2b2b;
+            color: #ffffff;
             font-size: 16px;
         }
 
         input[type="text"]:focus,
         textarea:focus {
-            border-color: #00ff99; /* Odaklanınca neon yeşil kenarlık */
-            outline: none; /* Kenarlık dışına çıkma */
+            border-color: #00ff99; 
+            outline: none; 
         }
 
         input[type="submit"] {
-            background: #00ff99; /* Buton rengi */
-            color: #000; /* Buton yazı rengi */
+            background: #00ff99;
+            color: #000; 
             cursor: pointer;
-            transition: background 0.3s; /* Geçiş efekti */
+            transition: background 0.3s; 
         }
 
         input[type="submit"]:hover {
-            background: #009966; /* Hover rengi */
+            background: #009966;
         }
 
         .errors {
@@ -182,7 +176,7 @@ $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
     </style>
 </head>
 <body>
-    <div class="matrix-container"></div> <!-- Matrix efekti için kapsayıcı -->
+    <div class="matrix-container"></div>
     <div class="container">
         <h1>CyberForum</h1>
         <div class="navbar">
