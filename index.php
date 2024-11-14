@@ -5,21 +5,18 @@ if (session_status() === PHP_SESSION_NONE) {
 require 'config.php';
 $errors = [];
 
-// CSRF token oluştur
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // CSRF koruması
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
         $errors[] = "Geçersiz CSRF token!";
     } else {
         $username = htmlspecialchars(trim($_POST['username']), ENT_QUOTES, 'UTF-8');
         $email = htmlspecialchars(trim($_POST['email']), ENT_QUOTES, 'UTF-8');
-        $password = password_hash(trim($_POST['password']), PASSWORD_DEFAULT); // Şifreyi hashle
+        $password = password_hash(trim($_POST['password']), PASSWORD_DEFAULT);
 
-        // Kullanıcı adı ve e-posta kontrolü
         $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE username = :username OR email = :email");
         $stmt->execute(['username' => $username, 'email' => $email]);
         $userExists = $stmt->fetchColumn();
@@ -28,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = "Bu kullanıcı adı veya e-posta adresi zaten mevcut.";
         }
 
-        // Hata yoksa kullanıcıyı kaydet
         if (empty($errors)) {
             $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
             $stmt->execute([
@@ -37,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'password' => $password
             ]);
 
-            // Kayıt başarılı, kullanıcıyı giriş sayfasına yönlendir
             header('Location: login.php');
             exit;
         }
@@ -108,7 +103,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="numbers">
         <?php
-        // Kayan sayılar oluşturma
         for ($i = 0; $i < 100; $i++): ?>
             <span style="left: <?= rand(0, 100) ?>%; animation-duration: <?= rand(3, 10) ?>s;"><?= rand(0, 9) ?></span>
         <?php endfor; ?>
