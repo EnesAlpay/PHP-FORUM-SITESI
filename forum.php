@@ -1,20 +1,20 @@
 <?php
-session_start(); // Oturumu başlat
+session_start(); 
 require 'config.php';
 
-// Arama işlemi
+
 $search = '';
 if (isset($_GET['search'])) {
     $search = htmlspecialchars(trim($_GET['search']), ENT_QUOTES, 'UTF-8');
 }
 
-// Tüm postları veritabanından çekelim
+
 if ($search) {
-    // Arama sorgusu
+   
     $stmt_posts = $pdo->prepare("SELECT posts.*, users.username FROM posts JOIN users ON posts.user_id = users.id WHERE title LIKE :search ORDER BY created_at DESC");
     $stmt_posts->bindValue(':search', '%' . $search . '%', PDO::PARAM_STR);
 } else {
-    // Tüm postları çek
+   
     $stmt_posts = $pdo->query("SELECT posts.*, users.username FROM posts JOIN users ON posts.user_id = users.id ORDER BY created_at DESC");
 }
 $stmt_posts->execute();
@@ -42,22 +42,22 @@ $posts = $stmt_posts->fetchAll();
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none; /* Tıklama olaylarını devre dışı bırak */
+            pointer-events: none; 
             overflow: hidden;
         }
         .column {
             position: absolute;
-            color: lime; /* Metin rengi */
-            font-family: monospace; /* Yazı tipi */
-            font-size: 20px; /* Yazı boyutu */
-            white-space: nowrap; /* Satır sonu ekleme */
-            opacity: 1; /* Başlangıçta görünür */
-            transition: opacity 0.1s ease; /* Opaklık geçişi */
+            color: lime;
+            font-family: monospace; 
+            font-size: 20px; 
+            white-space: nowrap; 
+            opacity: 1; 
+            transition: opacity 0.1s ease; 
         }
     </style>
 </head>
 <body>
-<div class="matrix-container"></div> <!-- Matrix efekti için kapsayıcı -->
+<div class="matrix-container"></div>
 
     <div class="container">
         <header class="navbar">
@@ -90,7 +90,7 @@ $posts = $stmt_posts->fetchAll();
                         <div class="comment-section">
                             <h3>Yorumlar</h3>
                             <?php
-                            // Her post için yorumları çekelim
+                         
                             $stmt_comments = $pdo->prepare("SELECT comments.*, users.username FROM comments JOIN users ON comments.user_id = users.id WHERE post_id = :post_id ORDER BY created_at ASC");
                             $stmt_comments->execute(['post_id' => $post['post_id']]);
                             $comments = $stmt_comments->fetchAll();
@@ -118,6 +118,6 @@ $posts = $stmt_posts->fetchAll();
             © 2024 Cyber Forum
         </footer>
     </div>
-    <script src="script.js"></script> <!-- JavaScript dosyasını ekleyin -->
+    <script src="script.js"></script>
 </body>
 </html>
