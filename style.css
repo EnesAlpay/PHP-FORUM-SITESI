@@ -1,22 +1,21 @@
-/* style.css */
 
 html, body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #1b1b1b; /* Karanlık arka plan rengi */
-    color: #ffffff; /* Yazı rengi */
-    position: relative; /* Konumlandırma için relative ayarla */
-    overflow: hidden; /* Taşmayı gizle */
+    background-color: #1b1b1b; 
+    color: #ffffff; 
+    position: relative; 
+    overflow: hidden;
 }
 
 .container {
     display: flex;
     flex-direction: column;
     max-height: 100vh;
-    position: relative; /* Ana kapsayıcı için konumlandır */
-    z-index: 1; /* İçeriklerin üstünde görünmesi için */
+    position: relative;
+    z-index: 1; 
     height: 100vh;
 }
 
@@ -62,15 +61,15 @@ nav .search-form input[type="submit"] {
 }
 
 main {
-    flex: 1; /* Ana içeriği esnek yap */
+    flex: 1; 
     padding: 20px;
-    overflow-y: auto; /* İçerik uzadığında kaydırmayı sağla */
+    overflow-y: auto;
 }
 
 
 .posts-container {
-    position: relative; /* posts-container için konumlandır */
-    z-index: 1; /* İçeriklerin üstünde görünmesi için */
+    position: relative; 
+    z-index: 1; 
 }
 .post-container {
     background: rgba(0, 0, 0, 0.8);
@@ -117,10 +116,10 @@ footer {
     background: rgba(0, 0, 0, 0.7);
     width: 100%;
     color: #aaaaaa;
-    margin-top: 20px; /* Diğer içerikten ayrım için */
+    margin-top: 20px; 
 }
 
-/* Yeni Post Oluştur */
+
 .create-post-container {
     background-color: #1a1a1a;
     padding: 20px;
@@ -160,7 +159,7 @@ footer {
     background-color: #00cc77;
 }
 
-/* Profil Sayfası */
+
 .profile-container {
     background-color: #1a1a1a;
     border-radius: 8px;
@@ -190,7 +189,7 @@ footer {
     color: #aaaaaa;
 }
 
-/* Post Listesi */
+
 .post-list {
     margin-top: 20px;
 }
@@ -208,7 +207,7 @@ footer {
     box-shadow: 0 4px 12px rgba(0, 255, 153, 0.3);
 }
 
-/* Footer */
+
 footer {
     background-color: rgba(0, 0, 0, 0.7);
     padding: 20px;
@@ -223,16 +222,16 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* Tıklama olaylarını devre dışı bırak */
+    pointer-events: none;
     overflow: hidden;
 }
 
 .column {
     position: absolute;
-    color: lime; /* Metin rengi */
-    font-family: monospace; /* Yazı tipi */
-    font-size: 20px; /* Yazı boyutu */
-    white-space: nowrap; /* Satır sonu ekleme */
-    opacity: 1; /* Başlangıçta görünür */
-    transition: opacity 0.1s ease; /* Opaklık geçişi */
+    color: lime; 
+    font-family: monospace; 
+    font-size: 20px; 
+    white-space: nowrap; 
+    opacity: 1; 
+    transition: opacity 0.1s ease; 
 }
