@@ -1,0 +1,238 @@
+/* style.css */
+
+html, body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #1b1b1b; /* Karanlık arka plan rengi */
+    color: #ffffff; /* Yazı rengi */
+    position: relative; /* Konumlandırma için relative ayarla */
+    overflow: hidden; /* Taşmayı gizle */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    max-height: 100vh;
+    position: relative; /* Ana kapsayıcı için konumlandır */
+    z-index: 1; /* İçeriklerin üstünde görünmesi için */
+    height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.logo {
+    font-size: 24px;
+}
+
+nav a {
+    color: #00ff00;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+nav .search-form {
+    display: flex;
+    align-items: center;
+}
+
+nav .search-form input[type="text"] {
+    padding: 5px;
+    border: 1px solid #00ff00;
+    border-radius: 3px;
+    background: black;
+    color: #00ff00;
+}
+
+nav .search-form input[type="submit"] {
+    padding: 5px 10px;
+    border: none;
+    background: #00ff00;
+    color: black;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+main {
+    flex: 1; /* Ana içeriği esnek yap */
+    padding: 20px;
+    overflow-y: auto; /* İçerik uzadığında kaydırmayı sağla */
+}
+
+
+.posts-container {
+    position: relative; /* posts-container için konumlandır */
+    z-index: 1; /* İçeriklerin üstünde görünmesi için */
+}
+.post-container {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 5px;
+}
+
+.post-container img {
+    display: block;
+    margin: 10px 0;
+}
+
+.comment-section {
+    margin-top: 15px;
+}
+
+.comment-section .form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.comment-section textarea {
+    padding: 5px;
+    border: 1px solid #00ff00;
+    border-radius: 3px;
+    background: black;
+    color: #00ff00;
+}
+
+.comment-section input[type="submit"] {
+    padding: 5px 10px;
+    border: none;
+    background: #00ff00;
+    color: black;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    color: #aaaaaa;
+    margin-top: 20px; /* Diğer içerikten ayrım için */
+}
+
+/* Yeni Post Oluştur */
+.create-post-container {
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 8px rgba(0, 255, 153, 0.2);
+    border: 1px solid white;
+}
+
+.create-post-container input[type="text"], 
+.create-post-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #2b2b2b;
+    color: #e0e0e0;
+}
+
+.create-post-container input[type="file"] {
+    color: #e0e0e0;
+    margin-top: 10px;
+}
+
+.create-post-container input[type="submit"] {
+    background-color: #00ff99;
+    border: none;
+    padding: 10px 20px;
+    color: #1a1a1a;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.create-post-container input[type="submit"]:hover {
+    background-color: #00cc77;
+}
+
+/* Profil Sayfası */
+.profile-container {
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 255, 153, 0.2);
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+}
+
+.profile-image {
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.profile-details {
+    color: #e0e0e0;
+}
+
+.profile-details h2 {
+    color: #00ff99;
+}
+
+.profile-details p {
+    color: #aaaaaa;
+}
+
+/* Post Listesi */
+.post-list {
+    margin-top: 20px;
+}
+
+.post-list .post-item {
+    background-color: #1a1a1a;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: transform 0.2s ease-in;
+}
+
+.post-list .post-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 255, 153, 0.3);
+}
+
+/* Footer */
+footer {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    color: #aaaaaa;
+    font-size: 0.9em;
+}
+.matrix-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Tıklama olaylarını devre dışı bırak */
+    overflow: hidden;
+}
+
+.column {
+    position: absolute;
+    color: lime; /* Metin rengi */
+    font-family: monospace; /* Yazı tipi */
+    font-size: 20px; /* Yazı boyutu */
+    white-space: nowrap; /* Satır sonu ekleme */
+    opacity: 1; /* Başlangıçta görünür */
+    transition: opacity 0.1s ease; /* Opaklık geçişi */
+}
