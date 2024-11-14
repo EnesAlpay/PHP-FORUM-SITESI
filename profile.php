@@ -4,7 +4,6 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 require 'config.php';
 
-// Kullanıcı oturumunun kontrolü
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;
@@ -12,7 +11,6 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Kullanıcı bilgilerini çek
 $stmt = $pdo->prepare("SELECT username, email FROM users WHERE id = :id");
 $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
 $stmt->execute();
@@ -22,7 +20,6 @@ if (!$user) {
     die("Kullanıcı bulunamadı.");
 }
 
-// Kullanıcının paylaşımlarını çek
 $stmt_posts = $pdo->prepare("SELECT post_id, title, content, image_path FROM posts WHERE user_id = :user_id");
 $stmt_posts->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 $stmt_posts->execute();
@@ -38,17 +35,16 @@ $posts = $stmt_posts->fetchAll(PDO::FETCH_ASSOC);
     
 </head>
 <style>
-   /* Profil Sayfası Stil */
 body {
-    font-family: 'Courier New', Courier, monospace; /* Monospace font stili */
-    background-color: #0c0c0c; /* Koyu arka plan */
-    color: #f0f0f0; /* Açık yazı rengi */
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #0c0c0c;
+    color: #f0f0f0;
     margin: 0;
     padding: 0;
 }
 
 .navbar {
-    background-color: #1a1a1a; /* Koyu menü rengi */
+    background-color: #1a1a1a; 
     overflow: hidden;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
@@ -56,7 +52,7 @@ body {
 .navbar a {
     float: left;
     display: block;
-    color: #f0f0f0; /* Menü bağlantı rengi */
+    color: #f0f0f0; 
     text-align: center;
     padding: 14px 20px;
     text-decoration: none;
@@ -64,30 +60,30 @@ body {
 }
 
 .navbar a:hover {
-    background-color: #007bff; /* Menü üzeri hover rengi */
+    background-color: #007bff; 
     color: white;
 }
 
 .container {
     width: 80%;
     margin: 20px auto;
-    background: #1e1e1e; /* Koyu içerik alanı rengi */
+    background: #1e1e1e; 
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
 h1, h2 {
-    color: #00ff00; /* Yeşil başlık rengi */
+    color: #00ff00;
     padding-bottom: 10px;
 }
 
 .profile-info {
-    border: 1px solid #444; /* Koyu kenar rengi */
+    border: 1px solid #444; 
     padding: 20px;
     border-radius: 5px;
     margin-bottom: 30px;
-    background-color: #2a2a2a; /* Koyu arka plan */
+    background-color: #2a2a2a; 
 }
 
 .profile-info p {
@@ -99,17 +95,17 @@ h1, h2 {
 }
 
 .post-item {
-    border: 1px solid #444; /* Koyu kenar rengi */
+    border: 1px solid #444; 
     padding: 20px;
     border-radius: 5px;
     margin-bottom: 30px;
-    background-color: #2a2a2a; /* Koyu arka plan */
+    background-color: #2a2a2a; 
     width: 300px;
     
 }
 
 .post-item h3 {
-    color: #00ff00; /* Yeşil başlık rengi */
+    color: #00ff00; 
 }
 
 .post-item img {
@@ -123,12 +119,12 @@ h1, h2 {
     display: inline-block;
     margin-top: 10px;
     text-decoration: none;
-    color: white; /* Bağlantı rengi */
+    color: white; 
     transition: color 0.3s ease;
 }
 
 .post-item a:hover {
-    color: #00ff00; /* Bağlantı hover rengi */
+    color: #00ff00;
 }
 
 .post-item form {
@@ -138,8 +134,8 @@ h1, h2 {
 footer {
     text-align: center;
     padding: 20px 0;
-    background-color: #1a1a1a; /* Koyu alt bilgi rengi */
-    color: #f0f0f0; /* Açık yazı rengi */
+    background-color: #1a1a1a; 
+    color: #f0f0f0; 
     position: relative;
     bottom: 0;
     width: 100%;
